@@ -160,8 +160,10 @@ const MOCK_BLOGS = [
         date: "Nov 15, 2024",
         image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         content: [
-            "React Server Components (RSC) represent a paradigm shift...",
-            "Traditionally, React apps were client-heavy..."
+            "React Server Components (RSC) represent a paradigm shift in how we build React applications. By moving components to the server, we can reduce bundle sizes and improve initial page load performance significantly. This isn't just a small optimization; it's a rethink of the client-server boundary.",
+            "Traditionally, React apps were client-heavy. The browser had to download a massive JavaScript bundle, parse it, and execute it before the user saw anything interactive. With RSC, components that don't need interactivity (like static layouts, markdown renderers, or data-heavy dashboards) stay on the server.",
+            "This means less JavaScript sent to the client, faster First Contentful Paint (FCP), and a smoother user experience on low-end devices. Frameworks like Next.js are leading this charge, making RSC the default way to build modern web apps.",
+            "However, the learning curve is real. Developers now need to think about 'use client' and 'use server' directives, serialization boundaries, and how state flows between these two worlds. But the benefits—better SEO, performance, and developer experience—are well worth the effort."
         ]
     },
     { 
@@ -172,7 +174,12 @@ const MOCK_BLOGS = [
         author: "Mike Ross",
         date: "Oct 22, 2024",
         image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        content: ["CSS Grid has revolutionized web layout design..."]
+        content: [
+            "CSS Grid has revolutionized web layout design, offering a two-dimensional grid-based layout system that, compared to Flexbox, is a game-changer for complex page structures. While Flexbox is perfect for one-dimensional layouts (rows OR columns), Grid handles both simultaneously.",
+            "One of the most powerful features of CSS Grid is 'grid-template-areas'. This allows you to name sections of your layout (like 'header', 'sidebar', 'main', 'footer') and visualize your layout directly in your CSS code. It makes responsive design incredibly intuitive—just redefine the template areas for different media queries.",
+            "Another often overlooked feature is `minmax()`. It allows you to create resilient tracks that adapt to their content but never shrink below a certain size. Combined with `auto-fit` and `auto-fill`, you can create responsive galleries that require zero media queries.",
+            "Start small. You don't need to replace every Flexbox container with Grid. Use Grid for the main page layout and Flexbox for aligning items inside buttons or navigation bars. They are best friends, not competitors."
+        ]
     },
     { 
         id: 3, 
@@ -182,7 +189,12 @@ const MOCK_BLOGS = [
         author: "Dr. Elena Vo",
         date: "Sep 10, 2024",
         image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        content: ["Python won because of its simplicity and its ecosystem..."]
+        content: [
+            "If you look at the landscape of Artificial Intelligence and Machine Learning today, one language stands undisputed: Python. But why? It wasn't the fastest language (C++ wins there), nor the most type-safe (Java or Rust).",
+            "Python won because of its simplicity and its ecosystem. Libraries like NumPy and Pandas turned data manipulation into a breeze. Then came Scikit-learn, democratizing machine learning algorithms. And finally, the heavy hitters: TensorFlow and PyTorch.",
+            "These frameworks provide Pythonic wrappers around highly optimized C++ and CUDA code. This gives data scientists the best of both worlds: the ease of writing Python scripts and the raw performance of low-level languages running on GPUs.",
+            "Furthermore, the community support is unparalleled. From research papers implementing code in PyTorch to Jupyter Notebooks used for education, Python is the lingua franca of AI. If you are starting a career in AI today, Python is not optional—it is the foundation."
+        ]
     }
 ];
 
@@ -806,17 +818,21 @@ function HomeView({ navigateTo, courses, blogs, setShowAuthModal, user }) {
                     ))}
                 </div>
             </div>
+            {/* INFORMATION SECTION - "Why MindCrafters?" */}
             <div className="py-24 bg-white relative overflow-hidden">
+                {/* Decorative background elements */}
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <div className="absolute -top-24 -right-24 w-96 h-96 bg-green-50 rounded-full blur-3xl opacity-50"></div>
                     <div className="absolute top-1/2 -left-24 w-72 h-72 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
                 </div>
+
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center mb-16 max-w-3xl mx-auto">
                         <Badge color="green">Our Mission</Badge>
                         <h2 className="text-4xl font-black text-[#064E3B] mt-4 mb-6">Reinventing How You Learn Tech</h2>
                         <p className="text-lg text-gray-600">We believe education should be accessible, practical, and directly linked to industry needs. Here is how we are different.</p>
                     </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         {[
                             { icon: <Monitor size={32}/>, title: "Project-Based Learning", desc: "Stop watching tutorials. Start building real applications that solve real problems." },
@@ -824,12 +840,16 @@ function HomeView({ navigateTo, courses, blogs, setShowAuthModal, user }) {
                             { icon: <Trophy size={32}/>, title: "Gamified Progress", desc: "Earn XP, badges, and certificates as you master new skills and complete challenges." }
                         ].map((item, i) => (
                             <div key={i} className="bg-[#FBFFF9] p-8 rounded-3xl border border-green-100 hover:shadow-xl transition-all duration-300 group hover:-translate-y-2">
-                                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-[#1A8F3A] mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">{item.icon}</div>
+                                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-[#1A8F3A] mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                                    {item.icon}
+                                </div>
                                 <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
                                 <p className="text-gray-500 leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
                     </div>
+
+                    {/* Stat Counters */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 border-t border-gray-100 pt-12">
                         {[
                             { num: "50k+", label: "Active Learners" },
@@ -845,6 +865,7 @@ function HomeView({ navigateTo, courses, blogs, setShowAuthModal, user }) {
                     </div>
                 </div>
             </div>
+            {/* CAREER UNLOCK SECTION */}
             <div className="bg-white py-20">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                     <div className="order-2 md:order-1 relative">
@@ -878,6 +899,7 @@ function HomeView({ navigateTo, courses, blogs, setShowAuthModal, user }) {
                     </div>
                 </div>
             </div>
+            {/* POPULAR COURSES */}
             <div className="py-20 bg-gray-50">
                  <div className="max-w-7xl mx-auto px-6">
                      <div className="flex justify-between items-end mb-12">
@@ -903,6 +925,7 @@ function HomeView({ navigateTo, courses, blogs, setShowAuthModal, user }) {
                      </div>
                  </div>
             </div>
+            {/* ANIMATED BLOGS */}
             <div className="py-24 bg-gradient-to-br from-gray-900 to-[#064E3B] relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')]"></div>
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
